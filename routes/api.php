@@ -1,5 +1,8 @@
 <?php
 
+
+use App\Http\Controllers\UserAuthenticationController;
+use App\Http\Controllers\AddPropertyAndImageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +17,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+/*Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+*/
+
+Route::middleware('auth:api')->group(function (){
+    Route::post('/logout',[UserAuthenticationController::class,'logout']);
+});
+
+Route::post('/register', [UserAuthenticationController::class, 'register']);
+Route::post('/login', [UserAuthenticationController::class, 'login']);
+Route::post('/addpropertyandimage', [AddPropertyAndImageController::class, 'addpropertyandimage']);
+
+
+
